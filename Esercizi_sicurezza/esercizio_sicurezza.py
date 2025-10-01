@@ -39,3 +39,9 @@ print("Messaggio decifrato: ", decifrato)
 # oppure usare join(cifrato) se cifrato è una lista di stringhe
 # oppure ''.join(cifrato) se cifrato è una lista di caratteri
 # oppure ''.join(map(chr, cifrato)) se cifrato è una lista di interi
+
+
+
+
+
+
