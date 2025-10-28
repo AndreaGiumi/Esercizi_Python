@@ -6,5 +6,5 @@ def unique_count(nums: list[int]) -> int:
     for num in nums:
         if num not in list_no_dup:
             list_no_dup.append(num)
-    return len(list_no_dup
-)
+    return len(list_no_dup)
+

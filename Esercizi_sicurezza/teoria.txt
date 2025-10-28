@@ -1,0 +1,40 @@
+rsa prevede una chiave publica e una chiave privata (numer interi di grandi dimensioni)
+
+kpub è fatta di due numeri
+kpriv è fatta di due numeri
+
+kpub(e, n)
+
+kpriv(d, n)
+
+A per manadre un mess a B
+
+A cifra(M, kb(pub))
+
+M è un numero intero
+
+l'operazione di cifra è M **e mod n --> C (è un intero)
+
+C mod n --> M (è un intero)
+
+
+in python esiste il comando pow(M,e,n)
+
+
+str --> int
+
+int --> str
+
+
+
+a = 37 l'interprete python salva questa variabile come fosse un dict con i valori ("a", 0, 4) dove a è il nome della variabile, 0 è il posto riservato nella RAM e 4 sono i byte.
+
+
+j e k vogliono creare una chiave, intesa come una sequenza di bite che solo loro due conosceranno
+
+tutto cio per scambiarsi messaggi pubblici (diffie-hellman)
+
+
+j e k voglio scambiarsi un messaggio utilizzando due dati pubblici (n e p)
+
+un numero, (p**a)**b --> (2**b)**a -->p**(a*b)
