@@ -20,18 +20,23 @@ def calculate_std_dev(nums: list[float]) -> float:
     3. Calcolo della deviazione standard:
     radice quadrata di 2.0 ≈ 1.41421356
     '''
-
     if not nums:
         raise ValueError("lista vuota")
-    else:
-        somma = 0
-        count = 0
-        for i, num in enumerate(nums):
-            somma += num
-            count += 1
-        media = somma / count
-        for num in nums:
-            varianza = (num - media) *2    
+    somma = 0
+
+    for i in nums:
+        somma += i
+    media = somma / len(nums)
+    somma = 0
+
+    for num in nums:
+        var = (num - media)**2
+        somma += var
+    result = somma / len(nums)
+
+    return result ** 0.5
+
+
 
     
         
