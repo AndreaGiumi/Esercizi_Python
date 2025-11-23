@@ -1,0 +1,18 @@
+1. Progettazione risorse: Considera un centro sportivo che gestisce corsi, istruttori e iscritti. 
+Elenca le principali risorse e scrivi gli URI corretti. Indica anche esempi di URI errati.
+
+    CORRETTI
+/corsi
+/iscritti
+/istruttori
+
+
+/iscritti/4
+
+
+    ERRATI
+
+/corso (sbagliato perchè scritto singolare invece di plurale)
+
+/creaCorso 
+

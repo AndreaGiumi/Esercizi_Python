@@ -20,7 +20,7 @@ def about() -> str:
 
 @app.route('/homepage/')
 def homepage():
-    print(url_for('about'))
+    # print(url_for('about'))
     print(url_for('benvenuto', nome="Andrea")) 
     return "Controlla la console per gli URL generati"
 

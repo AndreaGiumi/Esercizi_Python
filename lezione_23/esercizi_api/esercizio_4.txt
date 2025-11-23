@@ -1,0 +1,37 @@
+4. Progetta una mini API: un’agenzia di viaggi deve gestire destinazioni, clienti e prenotazioni. 
+Definisci 5 endpoint REST (metodo + URI + esempio di risposta JSON).
+
+
+/destinazioni
+/clienti
+/prenotazioni
+
+
+GET /destinazioni
+
+{
+  "data": [
+    {
+      "id": "dest-001",
+      "nome": "Parigi",
+      "paese": "Francia",
+      "descrizione": "La città dell'amore",
+      "prezzoMedioNotte": 120,
+      "disponibile": true
+    },
+    {
+      "id": "dest-002",
+      "nome": "Tokyo",
+      "paese": "Giappone",
+      "descrizione": "Tradizione e modernità",
+      "prezzoMedioNotte": 150,
+      "disponibile": true
+    }
+  ],
+  "totale": 2
+}
+
+risposta -> 200 OK
+
+
+POST
