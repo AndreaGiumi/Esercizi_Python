@@ -49,7 +49,7 @@ def extimate_time(id_vehicle: str, factor: float):
 
 @app.route("/vehicles/", methods=["POST"])
 def create_vehicle():
-    data = request.get_json()
+    data: dict = request.get_json()
     
     required = ["plate_id", "model", "driver_name", "registration_year", "status"]
     
