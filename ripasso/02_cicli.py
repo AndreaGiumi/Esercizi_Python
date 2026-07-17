@@ -40,8 +40,9 @@ def esercizio_2_2() -> None:
 # Se finisce i tentativi, rivela il numero segreto.
 def esercizio_2_3() -> None:
     segreto: int = random.randint(1, 50)
+    indovinato: bool = False
     i: int = 0
-    while i < 7:
+    while i < 7 and not indovinato:
         num: int = int(input("Inserisci numero: "))
 
         if num > segreto:
@@ -49,12 +50,18 @@ def esercizio_2_3() -> None:
         elif num < segreto:
             print("Troppo basso")
         else:
-            print(f"Indovinato è proprio lui!!!")
+            print("Indovinato è proprio lui!!!")
+            indovinato = True
         i += 1
-    if i == 7:
+
+    if not indovinato:
         print(f"Tentativi finiti, il numero segreto era: {segreto}")
+
+
+        
+    
 
 if __name__ == "__main__":
     # esercizio_2_1()
-    esercizio_2_2()
-    # esercizio_2_3()
+    # esercizio_2_2()
+    esercizio_2_3()
