@@ -226,3 +226,81 @@ I dati devono restare salvati su `rifugio.json` anche dopo il riavvio del server
 - Prima di guardare soluzioni vecchie, prova a scrivere tutto da zero
 - Testa ogni esercizio con casi limite: liste vuote, numeri negativi, input sbagliati
 - Fai un commit dopo ogni sezione completata
+
+---
+
+## Ripasso errori commessi
+
+Diario degli errori fatti durante gli esercizi, da rileggere prima di rifare una sezione.
+Ci sono due tipi di voce:
+- **Errori comuni / attenzione** (Sezioni 1-4): trappole tipiche e punti su cui stare attento, scritti in generale perché questi esercizi non li abbiamo rivisti insieme.
+- **Errori osservati** (dalla Sezione 5 in poi): sbagli reali fatti nel codice, con schema *cosa ho sbagliato → perché è un errore → regola da ricordare*.
+
+### Sezione 1 — Basi (errori comuni / attenzione)
+
+- **`input()` restituisce sempre una stringa.** Per fare calcoli o confronti numerici devi convertire con `int()` / `float()`. Dimenticarlo porta a errori (`"10" + 10`) o a confronti sbagliati.
+- **f-string senza la `f`.** Se scrivi `"Ciao {nome}"` senza la `f` davanti, le graffe restano testo letterale e non vengono sostituite.
+- **Pari/dispari (1.2):** usa il resto `% 2`. Ricorda che `0` è pari, ma l'esercizio chiede un messaggio dedicato → controlla il caso `0` **prima** del pari/dispari.
+- **Fasce di voto (1.3):** usa `elif` (non tanti `if` separati, che si sovrappongono) e cura l'ordine delle soglie. Attento ai bordi (90-100 include il 100?) e valida il range 0-100 prima di assegnare la fascia.
+- **`/` vs `//`:** la divisione normale dà sempre un `float`; usa `//` solo se vuoi il quoziente intero.
+
+### Sezione 2 — Cicli (errori comuni / attenzione)
+
+- **Ciclo infinito nel `while`.** Devi aggiornare dentro il ciclo la variabile che controlla la condizione, altrimenti non finisce mai.
+- **`range()` esclude l'estremo superiore.** `range(1, 10)` arriva a 9. Per la tabellina 1-10 serve `range(1, 11)`. Fonte tipica di errori "off-by-one".
+- **Accumulatori inizializzati fuori dal ciclo.** La somma/il contatore vanno messi a `0` **prima** del `for`/`while`, non dentro (altrimenti si azzerano ad ogni giro).
+- **Somma dei positivi (2.1):** non confondere "quante volte chiedo un numero" (5 iterazioni) con "quali sommo" (solo se `> 0`; lo `0` non è positivo).
+- **Indovina il numero (2.3):** converti l'input in `int`; esci dal ciclo con `break` appena indovina; mostra il numero segreto **solo** a tentativi esauriti. Conta bene i tentativi (attento all'off-by-one).
+
+### Sezione 3 — Liste e stringhe (errori comuni / attenzione)
+
+- **Gli indici partono da 0.** L'ultimo elemento è `lista[len(lista) - 1]` oppure `lista[-1]`; `lista[len(lista)]` dà `IndexError`.
+- **Min/max manuale (3.1):** inizializza il minimo e il massimo con il **primo elemento della lista**, non con `0`. Se parti da `0` sbagli con liste di soli negativi (o soli positivi). Per la media attento a `/` vs `//`.
+- **Palindromo (3.2):** normalizza con `.lower()` (ed eventualmente togli spazi) prima di confrontare. Ricorda che `s[::-1]` inverte la stringa.
+- **Le stringhe sono immutabili.** Non puoi fare `s[0] = "x"`; devi costruire una nuova stringa.
+- **Matrice (3.3):** NON creare la griglia con `[[0] * 3] * 3` → crea 3 riferimenti alla **stessa** riga, modificarne una le cambia tutte. Usa una list comprehension. Accedi con `m[riga][colonna]`.
+- **Non modificare una lista mentre la si scorre** (aggiunte/rimozioni durante il `for` danno comportamenti imprevisti).
+
+### Sezione 4 — Dizionari (errori comuni / attenzione)
+
+- **Chiave inesistente con `dict[chiave]` → `KeyError`.** Prima controlla con `in`, oppure usa `dict.get(chiave, default)`.
+- **Conta lettere (4.2):** il pattern comodo è `conteggio[c] = conteggio.get(c, 0) + 1`. Ricorda di ignorare gli spazi e decidi se contare maiuscole e minuscole come uguali (`.lower()`).
+- **Lettera più frequente:** si trova con `max(conteggio, key=conteggio.get)`; non confondere la chiave (lettera) con il valore (conteggio).
+- **Iterazione:** `.items()` dà coppie `(chiave, valore)`, `.keys()` le chiavi, `.values()` i valori. Scegliere quello sbagliato è un errore frequente.
+- **Rubrica (4.3):** prima di aggiungere/cercare/eliminare gestisci il caso "già esistente" o "inesistente". `del dict[k]` su una chiave assente dà errore → controlla prima.
+
+### Sezione 5 — Funzioni (rivisto il 2026-07-18)
+
+**5.1 — `divisione`: tipo di ritorno incoerente**
+- *Cosa*: annotazione `-> float | None`, ma in caso di divisore 0 restituivo la stringa `"Errore divisione per 0"`.
+- *Perché*: il valore restituito (`str`) non rispetta il tipo dichiarato; chi legge la firma si aspetta un numero o `None`, non testo.
+- *Regola*: l'annotazione di ritorno deve combaciare con **tutti** i possibili valori restituiti. O includi `str` nel tipo, o restituisci `None`/sollevi un errore e gestisci il messaggio fuori dalla funzione.
+
+**5.2 — `valida_password`: `return` dentro il ciclo (errore principale)**
+- *Cosa*: sia `return True` sia `return False` erano dentro il `for`, quindi la funzione decideva tutto sul **primo carattere** ed usciva subito.
+- *Perché*: per verificare "esiste almeno un carattere che…" devi guardare **tutta** la stringa prima di decidere.
+- *Regola*: nei controlli "esiste almeno uno…" usa dei **flag** booleani, accendili dentro il ciclo, e metti il `return` finale **fuori** dal ciclo.
+
+**5.2 — `valida_password`: confronti sbagliati sui caratteri**
+- *Cosa*: `i == i.isalnum()` (confronto tra una stringa e un booleano → sempre `False`) e `i == i.capitalize()` per "cercare la maiuscola".
+- *Perché*: `.isalnum()`/`.isupper()`/`.isdigit()` restituiscono **già** `True`/`False`, vanno usati direttamente in un `if`, non confrontati con il carattere. E `.capitalize()` non serve a sapere se un carattere è maiuscolo.
+- *Regola*: usa i metodi giusti — `.isupper()` per la maiuscola, `.isdigit()` per la cifra — dentro l'`if`, senza `i == ...`.
+
+**5.2 — `valida_password`: tre condizioni in un solo `and` su un carattere**
+- *Cosa*: `if maiuscola and numero and lunghezza` valutato su ogni singolo carattere.
+- *Perché*: un carattere non può essere **contemporaneamente** maiuscola *e* cifra, quindi quell'`and` non è mai vero. Le tre condizioni riguardano l'intera password, non il singolo carattere.
+- *Regola*: condizioni indipendenti → flag separati, combinati con `and` **alla fine**. La lunghezza si controlla una volta sola, fuori dal ciclo.
+
+**5.3 — `calcola_prezzo`: virgola al posto del punto nei decimali**
+- *Cosa*: `tot_con_sconto * 1,22`.
+- *Perché*: in Python la virgola crea una **tupla**: `x * 1,22` viene letto come `(x * 1, 22)`. Il separatore decimale è il **punto**.
+- *Regola*: i decimali si scrivono con il punto (`1.22`). Se una funzione "restituisce una coppia" senza motivo, sospetta una virgola di troppo.
+
+**5.3 — `calcola_prezzo`: valore "murato" invece del parametro**
+- *Cosa*: IVA fissa a `1.22` invece di usare il parametro `iva`.
+- *Perché*: così i valori di default e i keyword argument (`iva=4`) venivano ignorati — proprio lo scopo dell'esercizio.
+- *Regola*: costruisci il moltiplicatore **dal parametro** (`1 + iva / 100`), come già facevi con lo sconto (`sconto / 100`).
+
+**Nota trasversale (stile)**
+- `if condizione: return True` / `return False` si può scrivere direttamente `return condizione`, perché l'espressione è già un booleano.
+- Attento ai `float`: risultati tipo `109.80000000000001` sono normali; per i soldi "veri" esiste il modulo `decimal`.

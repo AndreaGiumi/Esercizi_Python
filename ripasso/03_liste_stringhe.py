@@ -65,11 +65,18 @@ def esercizio_3_2() -> None:
 #   - calcola la somma di ogni riga e di ogni colonna
 #   - calcola la somma della diagonale principale
 def esercizio_3_3() -> None:
-    # TODO
-    pass
+    matrice: list[list[int]] = []
+
+    row: list[int] = []
+    while len(row) < 3:
+        numeri: int = int(input("Inserisci i numeri nella matrice: "))
+
+        row.append(numeri)
+    matrice.append(row)
+    print(matrice)
 
 
 if __name__ == "__main__":
     # esercizio_3_1()
-    esercizio_3_2()
+    # esercizio_3_2()
     esercizio_3_3()
