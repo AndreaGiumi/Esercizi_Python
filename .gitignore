@@ -1,0 +1,17 @@
+# Byte-compiled / cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambienti virtuali
+.venv/
+venv/
+env/
+
+# File di configurazione IDE / editor
+.vscode/
+.idea/
+
+# File di sistema
+.DS_Store
+Thumbs.db
