@@ -10,28 +10,39 @@ import time
 # Esercizio 6.1 - Fattoriale
 # Funzione ricorsiva. Ricorda il caso base!
 def fattoriale(n: int) -> int:
-    # TODO
-    pass
+    if n == 0:
+        return 1
+    return n * fattoriale(n - 1)
 
 
 # Esercizio 6.2 - Potenza ricorsiva
 # Ricorsiva, senza usare **.
 def potenza(base: int, esponente: int) -> int:
-    # TODO
-    pass
-
+    if esponente == 0:
+        return 1
+    return base * potenza(base, esponente - 1)
 
 # Esercizio 6.3 - Fibonacci (difficile)
 # Versione ricorsiva e versione iterativa. Confronta i tempi con
 # time.time() per n = 30.
 def fibonacci_ricorsivo(n: int) -> int:
-    # TODO
-    pass
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fibonacci_ricorsivo(n - 1) + fibonacci_ricorsivo(n - 2)
 
 
 def fibonacci_iterativo(n: int) -> int:
-    # TODO
-    pass
+    a = 0
+    b = 1
+
+    for _ in range(n):
+        nuovo = a + b
+        a = b 
+        b = nuovo
+    return b
+
 
 
 if __name__ == "__main__":

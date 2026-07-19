@@ -304,3 +304,20 @@ Ci sono due tipi di voce:
 **Nota trasversale (stile)**
 - `if condizione: return True` / `return False` si può scrivere direttamente `return condizione`, perché l'espressione è già un booleano.
 - Attento ai `float`: risultati tipo `109.80000000000001` sono normali; per i soldi "veri" esiste il modulo `decimal`.
+
+### Sezione 6 — Ricorsione (rivisto il 2026-07-19)
+
+**6.3 — `fibonacci_ricorsivo`: secondo addendo con `n - 1` invece di `n - 2`**
+- *Cosa*: `return fibonacci_ricorsivo(n - 1) + fibonacci_ricorsivo(n - 1)` (stesso termine due volte).
+- *Perché*: sommare due volte `fib(n-1)` equivale a `2 * fib(n-1)`, quindi la funzione raddoppia ad ogni passo e produce le potenze di 2 (`1, 2, 4, 8, ...`), non la sequenza di Fibonacci (`1, 1, 2, 3, 5, ...`). Il "trucco" di Fibonacci è che i due addendi sono **diversi**.
+- *Regola*: attieniti alla definizione `fib(n) = fib(n-1) + fib(n-2)`. I due termini ricorsivi devono essere sfalsati (uno indietro di 1, l'altro di 2).
+
+**6.3 — `fibonacci_iterativo`: off-by-one nel ciclo + variabile di ritorno sbagliata**
+- *Cosa*: `for i in range(n + 1)` con `return b` → la funzione restituiva `fib(n + 2)` invece di `fib(n)` (es. `fibonacci_iterativo(5)` dava `13` invece di `5`).
+- *Perché*: partendo da `a = 0`, `b = 1`, dopo `k` giri si ha `a = fib(k)` e `b = fib(k+1)`. Con `n + 1` giri e restituendo `b` si finisce due posizioni troppo avanti.
+- *Regola*: servono esattamente `n` giri (`range(n)`) e il risultato è in `a` → `return a`. Verifica **sempre** con un caso piccolo a mano (`n = 0`, `n = 1`, `n = 5`) per scovare gli off-by-one prima di fidarti del codice.
+
+**Nota trasversale (concetto)**
+- Ricorsione ingenua vs iterazione: la versione ricorsiva di Fibonacci è O(2ⁿ) perché ricalcola più volte gli stessi valori (~2,7 milioni di chiamate per `n = 30`), mentre quella iterativa è O(n) (30 giri). Stessa formula, costo enormemente diverso: la ricorsione è elegante ma non sempre efficiente.
+- Se la variabile del `for` non la usi (conti solo le iterazioni), la convenzione è chiamarla `_` invece di `i`.
+- Per unire eleganza ricorsiva ed efficienza esiste la *memoizzazione* (ricorsione + cache dei risultati già calcolati) → argomento per il futuro.

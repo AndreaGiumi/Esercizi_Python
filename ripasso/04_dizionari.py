@@ -38,7 +38,7 @@ def conta_lettere(frase: str) -> dict[str, int]:
     print(diz)
 
     max: int = 0
-    lettera: str = None
+    lettera: str | None = None
 
     for key, value in diz.items():
         if value > max:

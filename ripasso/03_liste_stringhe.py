@@ -77,6 +77,6 @@ def esercizio_3_3() -> None:
 
 
 if __name__ == "__main__":
-    # esercizio_3_1()
-    # esercizio_3_2()
+    esercizio_3_1()
+    esercizio_3_2()
     esercizio_3_3()

@@ -60,7 +60,7 @@ def menu_calcolatrice() -> None:
             print("Qauli numeri vuoi dividere (ATTENZIONE ALLO ZERO): ")
             div1: float = float(input("Primo numero: "))
             div2: float = float(input("Secondo numero: "))
-            risultato: float = divisione(div1, div2)
+            risultato: float | str = divisione(div1, div2)
             print(f"Il risultato è {risultato}")
 
         elif operazione == "esc":

@@ -12,8 +12,11 @@ import re
 # Con filter() e una lambda: solo i multipli di 3.
 def esercizio_7_1() -> None:
     numeri: list[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    # TODO
-    pass
+    quadrati: list[int] = list(map(lambda x : x ** 2, numeri))
+    multipli: list[int] = list(filter(lambda x : x % 3 == 0, quadrati))
+    print(quadrati)
+    print(multipli)
+
 
 
 # Esercizio 7.2 - Ordinamento personalizzato
@@ -22,8 +25,7 @@ def esercizio_7_1() -> None:
 #   - per nome in ordine alfabetico
 def esercizio_7_2() -> None:
     studenti: list[tuple[str, int]] = [("Anna", 28), ("Luca", 30), ("Marco", 25)]
-    # TODO
-    pass
+    # new_stud: list[tuple[str, int]] = list(sorted(lambda:x))
 
 
 # Esercizio 7.3 - RegEx (difficile)
